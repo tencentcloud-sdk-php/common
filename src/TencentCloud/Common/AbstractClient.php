@@ -35,14 +35,14 @@ abstract class AbstractClient
     /**
      * @var string SDK版本
      */
-    public static $SDK_VERSION = "SDK_PHP_3.0.236";
+    public static $SDK_VERSION = "SDK_PHP_3.0.248";
 
     /**
      * @var integer http响应码200
      */
     public static $HTTP_RSP_OK = 200;
 
-    private $PHP_VERSION_MINIMUM = "5.6.33";
+    private $PHP_VERSION_MINIMUM = "5.6.0";
 
     /**
      * @var Credential 认证类实例，保存认证相关字段
