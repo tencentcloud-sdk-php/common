@@ -20,13 +20,12 @@ namespace TencentCloud\Common;
 use \ReflectionClass;
 
 /**
- * 抽象model类，禁止client引用
  * @package TencentCloud\Common
  */
 abstract class AbstractModel
 {
     /**
-     * 内部实现，用户禁止调用
+     * Internal implementation, normal users should not use it.
      */
     public function serialize()
     {
@@ -97,7 +96,7 @@ abstract class AbstractModel
     abstract public function deserialize($param);
 
     /**
-     * @param string $jsonString json格式的字符串
+     * @param string $jsonString json formatted string.
      */
     public function fromJsonString($jsonString)
     {

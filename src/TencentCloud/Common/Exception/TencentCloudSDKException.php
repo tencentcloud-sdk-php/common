@@ -19,13 +19,12 @@
 namespace TencentCloud\Common\Exception;
 
 /**
- * sdk异常类
  * @package TencentCloud\Common\Exception
  */
 class TencentCloudSDKException extends \Exception
 {
     /**
-     * @var string 请求id
+     * @var string
      */
     private $requestId;
 
@@ -34,9 +33,9 @@ class TencentCloudSDKException extends \Exception
 
     /**
      * TencentCloudSDKException constructor.
-     * @param string $code 异常错误码
-     * @param string $message 异常信息
-     * @param string $requestId 请求ID
+     * @param string $code
+     * @param string $message
+     * @param string $requestId
      */
     public function __construct($code = "", $message = "",  $requestId = "")
     {
@@ -46,7 +45,7 @@ class TencentCloudSDKException extends \Exception
     }
 
     /**
-     * 返回请求id
+     * Get request id.
      * @return string
      */
     public function getRequestId()
@@ -55,7 +54,7 @@ class TencentCloudSDKException extends \Exception
     }
 
     /**
-     * 返回错误码
+     * Get error code.
      * @return string
      */
     public function getErrorCode()
@@ -64,7 +63,7 @@ class TencentCloudSDKException extends \Exception
     }
 
     /**
-     * 格式化输出异常码，异常信息，请求id
+     * Format exception.
      * @return string
      */
     public function __toString()

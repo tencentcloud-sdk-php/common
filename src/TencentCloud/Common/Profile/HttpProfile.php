@@ -19,69 +19,62 @@
 namespace TencentCloud\Common\Profile;
 
 /**
- * http相关参数类
  * Class HttpProfile
  * @package TencentCloud\Common\Profile
  */
 class HttpProfile
 {
-
     /**
-     * @var string https访问
+     * @var string https
      */
     public static $REQ_HTTPS = "https://";
 
     /**
-     * @var string http访问
+     * @var string http
      */
     public static $REQ_HTTP = "http://";
 
     /**
-     * @var string  post请求
+     * @var string post
      */
     public static $REQ_POST = "POST";
 
     /**
-     * @var string  get请求
+     * @var string get
      */
     public static $REQ_GET = "GET";
 
     /**
-     * @var int 时间一分钟
+     * @var int Time for a minute.
      */
     public static $TM_MINUTE = 60;
 
     /**
-     * @var string http请求方法
+     * @var string http method.
      */
     private $reqMethod;
 
     /**
-     * @var string 请求接入点域名
+     * @var string
      */
     private $endpoint;
 
     /**
-     * @var integer 请求超时时长，单位为秒
+     * @var integer Unit second.
      */
     private $reqTimeout;
 
     /**
-     * @var string 请求协议
+     * @var string
      */
     private $protocol;
 
     /**
-     * @var string|array 请求代理
-     */
-    private $proxy;
-
-    /**
      * HttpProfile constructor.
-     * @param string $protocol  请求协议
-     * @param string $endpoint  请求接入点域名(xx.[region.]tencentcloudapi.com)
-     * @param string $reqMethod http请求方法，目前支持POST GET
-     * @param integer $reqTimeout 请求超时时间，单位:s
+     * @param string $protocol
+     * @param string $endpoint For i.e: (xx.[region.]tencentcloudapi.com)
+     * @param string $reqMethod http request method, POST GET
+     * @param integer $reqTimeout Timeout settings, unit second.
      */
     public function __construct($protocol = null, $endpoint = null, $reqMethod = null,  $reqTimeout = null)
     {
@@ -92,8 +85,7 @@ class HttpProfile
     }
 
     /**
-     * 设置http请求方法
-     * @param string $reqMethod http请求方法，目前支持POST GET
+     * @param string $reqMethod http
      */
     public function setReqMethod($reqMethod)
     {
@@ -101,16 +93,14 @@ class HttpProfile
     }
 
     /**
-     * 设置请求协议
-     * @param string $protocol 请求协议（https://  http://）
+     * @param string $protocol https://  http://
      */
     public function setProtocol($protocol) {
         $this->protocol = $protocol;
     }
 
     /**
-     * 设置请求接入点域名
-     * @param string $endpoint 请求接入点域名(xx.[region.]tencentcloudapi.com)
+     * @param string $endpoint
      */
     public function setEndpoint($endpoint)
     {
@@ -118,8 +108,7 @@ class HttpProfile
     }
 
     /**
-     * 设置请求超时时间
-     * @param integer $reqTimeout 请求超时时间，单位:s
+     * @param integer $reqTimeout Unit second.
      */
     public function setReqTimeout($reqTimeout)
     {
@@ -127,17 +116,7 @@ class HttpProfile
     }
 
     /**
-     * 设置请求代理
-     * @param string|array $proxy 请求代理配置
-     */
-    public function setProxy($proxy)
-    {
-        $this->proxy = $proxy;
-    }
-
-    /**
-     * 获取请求方法
-     * @return null|string 请求方法
+     * @return null|string
      */
     public function getReqMethod()
     {
@@ -145,8 +124,7 @@ class HttpProfile
     }
 
     /**
-     * 获取请求协议
-     * @return null|string 请求协议
+     * @return null|string
      */
     public function getProtocol()
     {
@@ -154,8 +132,7 @@ class HttpProfile
     }
 
     /**
-     * 获取请求超时时间
-     * @return int 请求超时时间
+     * @return int
      */
     public function getReqTimeout()
     {
@@ -163,20 +140,10 @@ class HttpProfile
     }
 
     /**
-     * 获取请求接入点域名
-     * @return null|string 接入点域名
+     * @return null|string
      */
     public function getEndpoint()
     {
         return $this->endpoint;
-    }
-
-    /**
-     * 获取请求代理
-     * @return null|string|array
-     */
-    public function getProxy()
-    {
-        return $this->proxy;
     }
 }
