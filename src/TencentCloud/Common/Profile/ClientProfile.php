@@ -19,57 +19,66 @@
 namespace TencentCloud\Common\Profile;
 
 /**
+ * client可选参数类
  * Class ClientProfile
  * @package TencentCloud\Common\Profile
  */
 class ClientProfile
 {
+
     /**
-     * @var string
+     * @var string  hmacsha1算法
      */
     public static $SIGN_HMAC_SHA1 = "HmacSHA1";
 
     /**
-     * @var string
+     * @var string hmacsha256算法
      */
     public static $SIGN_HMAC_SHA256 = "HmacSHA256";
 
     /**
-     * @var string
+     * @var string 签名V3
      */
     public static $SIGN_TC3_SHA256 = "TC3-HMAC-SHA256";
 
+
     /**
-     * @var HttpProfile
+     * @var HttpProfile http相关参数
      */
     private $httpProfile;
 
     /**
-     * @var string
+     * @var string 签名方法
      */
     private $signMethod;
 
     /**
-     * @var string
+     * @var string 忽略内容签名
      */
     private $unsignedPayload;
+
+    /**
+     * @var boolean
+     */
+    private $checkPHPVersion;
 
 
     /**
      * ClientProfile constructor.
-     * @param string $signMethod
-     * @param HttpProfile $httpProfile
+     * @param string $signMethod  签名算法，目前支持SHA256，SHA1
+     * @param HttpProfile $httpProfile http参数类
      */
     public function __construct($signMethod = null, $httpProfile = null)
     {
         $this->signMethod = $signMethod ? $signMethod : ClientProfile::$SIGN_TC3_SHA256;
         $this->httpProfile = $httpProfile ? $httpProfile : new HttpProfile();
         $this->unsignedPayload = false;
+        $this->checkPHPVersion = true;
     }
 
     /**
-     * Set signature method.
-     * @param string $signMethod
+     * 设置签名算法
+     * @param string $signMethod 签名方法，目前支持SHA256，SHA1, TC3
      */
     public function setSignMethod($signMethod)
     {
@@ -77,7 +86,8 @@ class ClientProfile
     }
 
     /**
-     * @param HttpProfile $httpProfile
+     * 设置http相关参数
+     * @param HttpProfile $httpProfile http相关参数
      */
     public function setHttpProfile($httpProfile)
     {
@@ -85,8 +95,8 @@ class ClientProfile
     }
 
     /**
-     * Get signature method.
-     * @return null|string
+     * 获取签名方法
+     * @return null|string 签名方法
      */
     public function getSignMethod()
     {
@@ -94,8 +104,8 @@ class ClientProfile
     }
 
     /**
-     * Set signature process without request payload.
-     * @param bool $flag true means ignore request payload.
+     * 设置是否忽略内容签名
+     * @param bool $flag true表示忽略签名
      */
     public function setUnsignedPayload($flag)
     {
@@ -103,7 +113,7 @@ class ClientProfile
     }
 
     /**
-     * Get flag of request payload is signed or not.
+     * 获取是否忽略内容签名标志位
      * @return bool
      */
     public function getUnsignedPayload()
@@ -111,9 +121,19 @@ class ClientProfile
         return $this->unsignedPayload;
     }
 
+    public function getCheckPHPVersion()
+    {
+        return $this->checkPHPVersion;
+    }
+
+    public function setCheckPHPVersion($flag)
+    {
+        $this->checkPHPVersion = $flag;
+    }
+
     /**
-     * Get http profile settings
-     * @return null|HttpProfile http
+     * 获取http选项实例
+     * @return null|HttpProfile http选项实例
      */
     public function getHttpProfile()
     {

@@ -27,56 +27,59 @@ use TencentCloud\Common\Exception\TencentCloudSDKException;
 
 
 /**
+ * 抽象api类，禁止client引用
  * @package TencentCloud\Common
  */
 abstract class AbstractClient
 {
     /**
-     * @var string SDK version
+     * @var string SDK版本
      */
-    public static $SDK_VERSION = "SDK_PHP_3.0.57";
+    public static $SDK_VERSION = "SDK_PHP_3.0.249";
 
     /**
-     * @var integer http response code 200
+     * @var integer http响应码200
      */
     public static $HTTP_RSP_OK = 200;
 
+    private $PHP_VERSION_MINIMUM = "5.6.0";
 
     /**
-     * @var Credential
+     * @var Credential 认证类实例，保存认证相关字段
      */
     private $credential;
 
     /**
-     * @var ClientProfile
+     * @var ClientProfile 会话配置信息类
      */
     private $profile;
 
     /**
-     * @var string
+     * @var string 产品地域
      */
     private $region;
 
     /**
-     * @var string
+     * @var string 请求路径
      */
     private $path;
 
     /**
-     * @var string sdk version
+     * @var string sdk版本号
      */
     private $sdkVersion;
 
     /**
-     * @var string api version
+     * @var string api版本号
      */
     private $apiVersion;
 
     /**
-     * @param string $endpoint
-     * @param string $version api version
-     * @param Credential $credential
-     * @param string $region
+     * 基础client类
+     * @param string $endpoint 请求域名
+     * @param string $version api版本
+     * @param Credential $credential 认证信息实例
+     * @param string $region 产品地域
      * @param ClientProfile $profile
      */
     function __construct($endpoint, $version, $credential, $region, $profile=null)
@@ -95,11 +98,15 @@ abstract class AbstractClient
         }
         $this->sdkVersion = AbstractClient::$SDK_VERSION;
         $this->apiVersion = $version;
+
+        if (version_compare(phpversion(), $this->PHP_VERSION_MINIMUM, '<') && $profile->getCheckPHPVersion()) {
+            throw new TencentCloudSDKException("ClientError", "PHP version must >= ".$this->PHP_VERSION_MINIMUM.", your current is ".phpversion());
+        }
     }
 
     /**
-     * Set region info.
-     * @param string $region
+     * 设置产品地域
+     * @param string $region 地域
      */
     public function setRegion($region)
     {
@@ -107,7 +114,7 @@ abstract class AbstractClient
     }
 
     /**
-     * Get region info.
+     * 获取产品地域
      * @return string
      */
     public function getRegion()
@@ -116,8 +123,8 @@ abstract class AbstractClient
     }
 
     /**
-     * Set credential info.
-     * @param Credential $credential
+     * 设置认证信息实例
+     * @param Credential $credential 认证信息实例
      */
     public function setCredential($credential)
     {
@@ -125,7 +132,7 @@ abstract class AbstractClient
     }
 
     /**
-     * Get credential info.
+     * 返回认证信息实例
      * @return Credential
      */
     public function getCredential()
@@ -134,8 +141,8 @@ abstract class AbstractClient
     }
 
     /**
-     * Set client profile info.
-     * @param ClientProfile $profile
+     * 设置配置实例
+     * @param ClientProfile $profile 配置实例
      */
     public function setClientProfile($profile)
     {
@@ -143,7 +150,7 @@ abstract class AbstractClient
     }
 
     /**
-     * Get client profile info.
+     * 返回配置实例
      * @return ClientProfile
      */
     public function getClientProfile()
@@ -152,8 +159,8 @@ abstract class AbstractClient
     }
 
     /**
-     * @param string $action
-     * @param array $request
+     * @param string $action  方法名
+     * @param array $request  参数列表
      * @return mixed
      * @throws TencentCloudSDKException
      */

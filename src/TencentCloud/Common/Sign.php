@@ -20,6 +20,7 @@ namespace TencentCloud\Common;
 
 use TencentCloud\Common\Exception\TencentCloudSDKException;
 /**
+ * 签名类，禁止client引用
  * @package TencentCloud\Common
  * @throws TencentCloudSDKException
  */

@@ -19,6 +19,7 @@
 namespace TencentCloud\Common;
 
 /**
+ * 证书类，保存认证相关参数
  * @package TencentCloud\Common
  */
 class Credential
@@ -52,7 +53,7 @@ class Credential
     }
 
     /**
-     * Set secretId
+     * 设置secretId
      * @param string $secretId secretId
      */
     public function  setSecretId($secretId)
@@ -61,7 +62,7 @@ class Credential
     }
 
     /**
-     * Set secretKey
+     * 设置secretKey
      * @param string $secretKey secretKey
      */
     public function setSecretKey($secretKey)
@@ -70,7 +71,7 @@ class Credential
     }
 
     /**
-     * @param string $token
+     * @param string $token 要设置的token
      */
     public function setToken($token)
     {
@@ -78,7 +79,7 @@ class Credential
     }
 
     /**
-     * Get secretId
+     * 获取secretId
      * @return string secretId
      */
     public function getSecretId()
@@ -87,7 +88,7 @@ class Credential
     }
 
     /**
-     * Get secretKey
+     * 获取secretKey
      * @return string secretKey
      */
     public function getSecretKey()
@@ -96,7 +97,7 @@ class Credential
     }
 
     /**
-     * Get token
+     * 获取token
      * @return null|string token
      */
     public function getToken()
