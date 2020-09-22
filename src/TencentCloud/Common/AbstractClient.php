@@ -35,7 +35,7 @@ abstract class AbstractClient
     /**
      * @var string SDK版本
      */
-    public static $SDK_VERSION = "SDK_PHP_3.0.255";
+    public static $SDK_VERSION = "SDK_PHP_3.0.256";
 
     /**
      * @var integer http响应码200
@@ -241,6 +241,11 @@ abstract class AbstractClient
             $headers["X-TC-Token"] = $this->credential->getToken();
         }
 
+	$language = $this->profile->getLanguage();
+	if ($language) {
+	    $headers["X-TC-Language"] = $language;
+	}
+
         $canonicalUri = $this->path;
 
         $reqmethod = $this->profile->getHttpProfile()->getReqMethod();
@@ -378,6 +383,11 @@ abstract class AbstractClient
         if ($this->profile->getSignMethod()) {
             $param["SignatureMethod"] = $this->profile->getSignMethod();
         }
+
+	$language = $this->profile->getLanguage();
+	if ($language) {
+	    $param["Language"] = $language;
+	}
 
         $signStr = $this->formatSignString($this->profile->getHttpProfile()->getEndpoint(),
             $this->path, $param,  $reqMethod);
